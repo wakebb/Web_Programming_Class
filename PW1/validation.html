@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="validation.html">
+<head>
+<script>
+function validateName(){
+     var x, text,h;
+     h =/^[a-z0-9.]*$/gi;
+     x = document.getElementById("USERNAME").value;
+     
+     if (h.test(x)==true) 
+     {
+        text = "USERNAME OK";
+     } else {
+        text = "USERNAME not valid";
+     }
+    document.getElementById("demo1").innerHTML = text;
+      }
+ function validatePw(){
+     var x, text;
+     x = document.getElementById("PASSWORD").value;
+     if (x.length < 8) {
+        text = "Password not valid";
+     } else {
+        text = "Password OK";
+     }
+    document.getElementById("demo2").innerHTML = text;
+      }
+  function validateEmail(){
+     var y, text,z;
+     y = document.getElementById("EMAIL").value;
+     z = y.includes("@");
+     if (z==true ) {
+        text = "Email ok";
+     } else {
+        text = "Email not valid";
+     }
+    document.getElementById("demo3").innerHTML = text;
+      }
+
+</script>
+</head>
+<body>
+<div>
+<form>
+USERNAME:
+<input type="text" id="USERNAME" >
+<input type="button" id="testuser" onclick="validateName()" value="test">
+<br>
+PASSWORD:
+<input type="text" id="PASSWORD" >
+<input type="button" id="testpw" onclick="validatePw()" value="test">
+<br>
+EMAIL :  
+<input type="text" id="EMAIL" >
+<input type="button" id="testemail" onclick="validateEmail()" value="test"><br>
+<p id="demo1"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+<form>
+</div>
+</body>
+</html>
+
+

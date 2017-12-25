@@ -1,0 +1,152 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+    function getNames(y , g)
+    {
+      var genderValue = '';
+      if(g == 'M') 
+        genderValue = 'Boy';
+      else 
+        genderValue = 'Girl';
+      
+      $.ajax({
+        type:'POST',
+        url: "babynames.php",
+        data: { year: y, gender: g},
+	      success: function(result) {
+		      result = $.trim(result);	
+		      $('.'+genderValue).html('<h2>'+genderValue+' Names</h2>'+result+result1);
+	      }
+      });
+   }   
+  </script>
+</head>
+
+<body>
+  <div>
+    <select id="year">
+      <option value="2013">2013</option>
+      <option value="2012">2012</option>
+      <option value="2011">2011</option>
+      <option value="2010">2010</option>
+      <option value="2009">2009</option>
+      <option value="2008">2008</option>
+      <option value="2007">2007</option>
+      <option value="2006">2006</option>
+      <option value="2005">2005</option>
+      <option value="2004">2004</option>
+    </select>
+
+    <button id="getNames" >Get Names</button>
+  </div>
+
+  <div>
+    <div class="Boy">
+	    <h2>Boy Names</h2>
+    </div>
+
+    <div class="Girl">
+	     <h2>Girls Names</h2>
+    </div>
+  </div>
+</body>
+
+
+<script>
+  $('#getNames').on('click',function(){
+    var opt = document.getElementById("year").selectedIndex;
+    var year = document.getElementsByTagName("option")[opt].value;
+    getNames(year,'M');
+    getNames(year,'F');
+  });
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+ <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+
+      function showData()
+      {
+        var year = $('#select_year').val();;
+        $.ajax({
+          type: 'POST',
+          url: 'babynames.php',
+          data: "year=" + year + "&gender=F",
+          success: function(html)
+          {
+            $('#result_F').html(html);
+          }
+        });
+
+        $.ajax({
+          type: 'POST',
+          url: 'babynames.php',
+          data: "year=" + year + "&gender=M",
+          success: function(html)
+          {
+            $('#result_M').html(html);
+          }
+        });
+      }
+      
+
+
+</script>
+<title>Display Baby Names</title>
+</head>
+<body>
+
+    <form>
+      
+     <select id="select_year" name="select_year">>
+     <option value="0">--Select Year--</option>
+      <option value="2015">2015</option>
+      <option value="2014">2014</option>
+      <option value="2013">2013</option>
+      <option value="2012">2012</option>
+      <option value="2011">2011</option>
+      <option value="2010">2010</option>
+      <option value="2009">2009</option>
+      <option value="2008">2008</option>
+      <option value="2007">2007</option>
+      <option value="2006">2006</option>
+      <option value="2005">2005</option>
+    </select><br/>
+    
+    <select id="select_gender" name="select_gender">
+     <option value="sex">--Select Sex--</option>
+     <option value="male">Male</option>
+     <option value="famale">Female</option>
+    </select>
+      <br>
+      <br>
+      <button class="send_year" type="button" onclick="showData()">Submit</button>
+      <br>
+      <br>
+    </form>
+
+    <div id="result_M">
+    <b>Most popular girls' name will be listed here.</b>
+    <b>Most popular boys' name will be listed here.</b>
+
+
+    </div>
+
+</body>
+</html>
